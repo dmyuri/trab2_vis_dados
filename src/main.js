@@ -9,7 +9,8 @@ import {
     chartPie,
     chartByDistrict,
     chartArrestByType,
-    clearAllCharts
+    clearAllCharts,
+    chartByMonthLine
 } from './visualizations';
 
 let chicago = null;
@@ -70,6 +71,9 @@ async function loadAllVisualizations() {
 
         const monthData = await chicago.getCrimesByMonth();
         chartByMonth(monthData, 'chart-month');
+        
+        const monthDataYear = await chicago.getCrimesByMonthAndYear();
+        chartByMonthLine(monthDataYear, 'chart-street-month');
 
         const timelineData = await chicago.getTimelineData();
         chartTimeline(timelineData, 'chart-timeline');
