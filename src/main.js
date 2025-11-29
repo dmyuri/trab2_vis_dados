@@ -66,9 +66,6 @@ async function loadAllVisualizations() {
         const hourData = await chicago.getCrimesByHour();
         chartByHour(hourData, 'chart-hour');
 
-        const dayData = await chicago.getCrimesByDayOfWeek();
-        chartByDay(dayData, 'chart-day');
-
         const monthData = await chicago.getCrimesByMonth();
         chartByMonth(monthData, 'chart-month');
         
