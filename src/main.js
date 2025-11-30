@@ -7,7 +7,6 @@ import {
     chartTopPrimaryTypes,
     chartTopLocations,
     chartPie,
-    chartByDistrict,
     chartArrestByType,
     clearAllCharts,
     chartByMonthLine
@@ -86,14 +85,8 @@ async function loadAllVisualizations() {
         const arrestData = await chicago.getArrestDistribution();
         chartPie(arrestData, 'chart-arrest', 'Arrest');
 
-        const domesticData = await chicago.getDomesticDistribution();
-        chartPie(domesticData, 'chart-domestic', 'Domestic');
-
         // Additional analyses
         console.log('Carregando análises adicionais...');
-        const districtData = await chicago.getCrimesByDistrict();
-        chartByDistrict(districtData, 'chart-district');
-
         const arrestTypeData = await chicago.getArrestByPrimaryType();
         chartArrestByType(arrestTypeData, 'chart-arrest-type');
 

@@ -870,7 +870,7 @@ export function chartArrestByType(data, svgId) {
         .attr('fill', d => color(d.key))
         .on('mouseover', function(event, d) {
             tooltip.transition().duration(200).style('opacity', 1);
-            const label = d.key === 'with_arrest' ? 'Com Arrest' : 'Sem Arrest';
+            const label = d.key === 'with_arrest' ? 'Com Prisão' : 'Sem Prisão';
             tooltip.html(`${d.type}<br>${label}: ${d.value.toLocaleString()}`)
                 .style('left', (event.pageX + 10) + 'px')
                 .style('top', (event.pageY - 10) + 'px')
@@ -900,8 +900,8 @@ export function chartArrestByType(data, svgId) {
         .attr('transform', `translate(${width - 100}, 20)`);
 
     const legendData = [
-        { label: 'Com Arrest', color: color('with_arrest') },
-        { label: 'Sem Arrest', color: color('without_arrest') }
+        { label: 'Com Prisão', color: color('with_arrest') },
+        { label: 'Sem Prisão', color: color('without_arrest') }
     ];
 
     legend.selectAll('.legend-item')

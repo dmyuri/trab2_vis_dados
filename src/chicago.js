@@ -187,8 +187,8 @@ export class Chicago {
         const sql = `
             SELECT 
                 CASE 
-                    WHEN "Arrest" = true THEN 'Com Arrest'
-                    WHEN "Arrest" = false THEN 'Sem Arrest'
+                    WHEN "Arrest" = true THEN 'Com Prisão'
+                    WHEN "Arrest" = false THEN 'Sem Prisão'
                     ELSE 'Desconhecido'
                 END as arrest_status,
                 COUNT(*) as count
