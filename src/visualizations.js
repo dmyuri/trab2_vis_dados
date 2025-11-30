@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { translateCrimeType, translateLocation } from './translations';
 
-const margins = { left: 60, right: 30, top: 30, bottom: 60 };
+const margins = { left: 120, right: 30, top: 30, bottom: 100 };
 
 // Helper function to get SVG dimensions
 function getSvgDimensions(svg) {
@@ -92,14 +92,14 @@ export function chartByHour(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Hora do Dia');
 
     g.append('text')
         .attr('class', 'axis-label')
         .attr('transform', 'rotate(-90)')
-        .attr('y', -40)
+        .attr('y', -60)
         .attr('x', -height / 2)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
@@ -168,14 +168,14 @@ export function chartByDay(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Dia da Semana');
 
     g.append('text')
         .attr('class', 'axis-label')
         .attr('transform', 'rotate(-90)')
-        .attr('y', -40)
+        .attr('y', -60)
         .attr('x', -height / 2)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
@@ -244,14 +244,14 @@ export function chartByMonth(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Mês');
 
     g.append('text')
         .attr('class', 'axis-label')
         .attr('transform', 'rotate(-90)')
-        .attr('y', -40)
+        .attr('y', -60)
         .attr('x', -height / 2)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
@@ -347,7 +347,7 @@ export function chartByMonthLine(data, svgId) {
     // Labels
     g.append("text")
         .attr("class", "axis-label")
-        .attr("transform", `translate(${width / 2}, ${height + 40})`)
+        .attr("transform", `translate(${width / 2}, ${height + 60})`)
         .style("text-anchor", "middle")
         .text("Mês");
 
@@ -492,14 +492,14 @@ export function chartTimeline(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Data');
 
     g.append('text')
         .attr('class', 'axis-label')
         .attr('transform', 'rotate(-90)')
-        .attr('y', -40)
+        .attr('y', -60)
         .attr('x', -height / 2)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
@@ -579,7 +579,7 @@ export function chartTopPrimaryTypes(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
 }
@@ -658,7 +658,7 @@ export function chartTopLocations(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
 }
@@ -794,14 +794,14 @@ export function chartByDistrict(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 40})`)
+        .attr('transform', `translate(${width / 2}, ${height + 60})`)
         .style('text-anchor', 'middle')
         .text('Distrito');
 
     g.append('text')
         .attr('class', 'axis-label')
         .attr('transform', 'rotate(-90)')
-        .attr('y', -40)
+        .attr('y', -60)
         .attr('x', -height / 2)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');
@@ -928,14 +928,14 @@ export function chartArrestByType(data, svgId) {
     // Labels
     g.append('text')
         .attr('class', 'axis-label')
-        .attr('transform', `translate(${width / 2}, ${height + 50})`)
+        .attr('transform', `translate(${width / 2}, ${height + 80})`)
         .style('text-anchor', 'middle')
         .text('Tipo de Crime');
 
     g.append('text')
         .attr('class', 'axis-label')
         .attr('transform', 'rotate(-90)')
-        .attr('y', -40)
+        .attr('y', -60)
         .attr('x', -height / 2)
         .style('text-anchor', 'middle')
         .text('Número de Crimes');

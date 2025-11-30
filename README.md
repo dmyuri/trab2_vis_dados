@@ -1,6 +1,6 @@
 # Visualização de Dados - Crimes de Chicago
 
-Este projeto implementa uma narrativa visual replicável sobre o comportamento dos dados de crimes de Chicago, seguindo os requisitos do trabalho de visualização de dados.
+Este projeto implementa uma visualização dos dados criminais de Chicago do ano de 2019 a 2024. 
 
 ## Estrutura do Projeto
 
@@ -53,7 +53,6 @@ npm run dev
 ### 1. Variações Temporais
 
 - **Crimes por Hora do Dia**: Gráfico de barras mostrando a distribuição de crimes ao longo das 24 horas
-- **Crimes por Dia da Semana**: Gráfico de barras mostrando a distribuição por dia da semana
 - **Crimes por Mês (Sazonalidade)**: Gráfico de barras mostrando padrões sazonais
 - **Série Temporal**: Gráfico de linha/área mostrando a evolução dos crimes ao longo do tempo
 
@@ -61,13 +60,11 @@ npm run dev
 
 - **Top 10 Tipos de Crime**: Gráfico de barras horizontais com os tipos de crime mais frequentes
 - **Top 10 Localizações**: Gráfico de barras horizontais com as localizações mais frequentes
-- **Distribuição Arrest vs Não-Arrest**: Gráfico de pizza
-- **Distribuição Domestic vs Não-Domestic**: Gráfico de pizza
+- **Distribuição Com prisão vs Sem prisão**: Gráfico de pizza
 
 ### 3. Análises Adicionais
 
-- **Crimes por Distrito**: Gráfico de barras mostrando a distribuição por distrito
-- **Relação Arrest vs Primary Type**: Gráfico de barras agrupadas mostrando a relação entre tipos de crime e ocorrência de arrest
+- **Relação Prisão vs Tipo de Crime**: Gráfico de barras agrupadas mostrando a relação entre tipos de crime e ocorrência de arrest
 
 ## Tecnologias Utilizadas
 
