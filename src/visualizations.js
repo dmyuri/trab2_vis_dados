@@ -256,6 +256,142 @@ export function chartByMonth(data, svgId) {
         .text('Número de Crimes');
 }
 
+// Chart: Crimes por Mês, separados por ano e apenas na Rua (Line Chart)
+export function chartByMonthLine(data, svgId) {
+    const svg = d3.select(`#${svgId}`);
+    svg.selectAll("*").remove();
+
+    const { width, height } = getSvgDimensions(svg);
+    const g = svg.append("g")
+        .attr("transform", `translate(${margins.left},${margins.top})`);
+
+    // Garantir números
+    data = data.map(d => ({
+        year: toNumber(d.year),
+        month: toNumber(d.month),
+        month_name: d.month_name,
+        count: toNumber(d.count)
+    }));
+
+    // ---- AGRUPAR POR ANO ----
+    const years = Array.from(new Set(data.map(d => d.year))).sort();
+    const dataByYear = d3.group(data, d => d.year);
+
+    // Escalas
+    const xScale = d3.scaleBand()
+        .domain(data.map(d => d.month_name))
+        .range([0, width])
+        .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.count)])
+        .nice()
+        .range([height, 0]);
+
+    // 🎨 Paleta automática (10 cores)
+    // Você pode trocar para d3.schemeCategory10 se preferir.
+    const color = d3.scaleOrdinal()
+        .domain(years)
+        .range(d3.schemeTableau10);
+
+    const tooltip = createTooltip();
+
+    // Gerador da linha SEM suavização
+    const line = d3.line()
+        .x(d => xScale(d.month_name) + xScale.bandwidth() / 2)
+        .y(d => yScale(d.count));
+
+    // ---- DESENHAR LINHAS PARA CADA ANO ----
+    years.forEach(year => {
+        const yearData = dataByYear.get(year).sort((a, b) => a.month - b.month);
+
+        // Linha
+        g.append("path")
+            .datum(yearData)
+            .attr("fill", "none")
+            .attr("stroke", color(year))
+            .attr("stroke-width", 2)
+            .attr("d", line);
+
+        // Pontos
+        g.selectAll(`.point-${year}`)
+            .data(yearData)
+            .enter()
+            .append("circle")
+            .attr("class", `point point-${year}`)
+            .attr("cx", d => xScale(d.month_name) + xScale.bandwidth() / 2)
+            .attr("cy", d => yScale(d.count))
+            .attr("r", 4)
+            .attr("fill", color(year))
+            .on("mouseover", function(event, d) {
+                tooltip.style("opacity", 1);
+                tooltip.html(`${d.month_name}/${d.year}<br>Crimes: ${d.count.toLocaleString()}`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 10) + "px")
+                    .classed("visible", true);
+            })
+            .on("mouseout", function() {
+                tooltip.style("opacity", 0);
+            });
+    });
+
+    // ---- EIXOS ----
+    g.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale));
+
+    g.append("g")
+        .call(d3.axisLeft(yScale).tickFormat(d3.format(".2s")));
+
+    // Labels
+    g.append("text")
+        .attr("class", "axis-label")
+        .attr("transform", `translate(${width / 2}, ${height + 40})`)
+        .style("text-anchor", "middle")
+        .text("Mês");
+
+    g.append("text")
+        .attr("class", "axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -40)
+        .attr("x", -height / 2)
+        .style("text-anchor", "middle")
+        .text("Número de Crimes");
+
+    // ---- LEGENDA NA PARTE INFERIOR ----
+
+    // Distância vertical abaixo do eixo X
+    const legendY = height + 25;
+
+    // Agrupamento da legenda
+    const legend = g.append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(${width / 2 - 400}, ${legendY})`)
+        .style("text-anchor", "middle");
+
+    // Cada item da legenda
+    years.forEach((year, i) => {
+        const row = legend.append("g")
+            .attr("transform", `translate(${(i - years.length / 2) * 70}, 0)`);
+
+        // Quadradinho de cor
+        row.append("rect")
+            .attr("width", 16)
+            .attr("height", 16)
+            .attr("fill", color(year));
+
+        // Texto
+        row.append("text")
+            .attr("x", 34)
+            .attr("y", 13)
+            .style("font-size", "14px")
+            .style("font-weight", "bold")  
+            .style("fill", "#000")        
+            .text(year);
+    });
+
+}
+
 // Chart: Timeline (Série Temporal)
 export function chartTimeline(data, svgId) {
     const svg = d3.select(`#${svgId}`);

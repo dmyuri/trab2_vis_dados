@@ -109,6 +109,39 @@ export class Chicago {
         return await this.query(sql);
     }
 
+    async getCrimesByMonthAndYear() {
+        const sql = `
+            SELECT 
+                EXTRACT(YEAR FROM "Date") AS year,
+                EXTRACT(MONTH FROM "Date") AS month,
+                CASE EXTRACT(MONTH FROM "Date")
+                    WHEN 1 THEN 'Jan'
+                    WHEN 2 THEN 'Fev'
+                    WHEN 3 THEN 'Mar'
+                    WHEN 4 THEN 'Abr'
+                    WHEN 5 THEN 'Mai'
+                    WHEN 6 THEN 'Jun'
+                    WHEN 7 THEN 'Jul'
+                    WHEN 8 THEN 'Ago'
+                    WHEN 9 THEN 'Set'
+                    WHEN 10 THEN 'Out'
+                    WHEN 11 THEN 'Nov'
+                    WHEN 12 THEN 'Dez'
+                END AS month_name,
+                COUNT(*) AS count
+            FROM ${this.table}
+            WHERE 
+                "Date" IS NOT NULL
+                AND "Location Description" IS NOT NULL
+                AND "Location Description" = 'STREET'
+            GROUP BY 
+                EXTRACT(YEAR FROM "Date"),
+                EXTRACT(MONTH FROM "Date")
+            ORDER BY year, month;
+        `;
+        return await this.query(sql);
+    }
+
     async getTimelineData() {
         const sql = `
             SELECT 
