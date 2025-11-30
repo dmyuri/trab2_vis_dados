@@ -242,21 +242,5 @@ export class Chicago {
         `;
         return await this.query(sql);
     }
-
-    async getDataQualityInfo() {
-        const sql = `
-            SELECT 
-                COUNT(*) as total_records,
-                COUNT("Date") as records_with_date,
-                COUNT("Primary Type") as records_with_type,
-                COUNT("Location Description") as records_with_location,
-                COUNT("Arrest") as records_with_arrest,
-                COUNT("Domestic") as records_with_domestic,
-                MIN("Date") as min_date,
-                MAX("Date") as max_date
-            FROM ${this.table}
-        `;
-        return await this.query(sql);
-    }
 }
 

@@ -35,10 +35,6 @@ async function loadData() {
 
         console.log('Dados carregados com sucesso!');
 
-        // Get data quality info
-        const qualityInfo = await chicago.getDataQualityInfo();
-        console.log('Informações de Qualidade dos Dados:', qualityInfo[0]);
-
         // Load all visualizations
         await loadAllVisualizations();
 
