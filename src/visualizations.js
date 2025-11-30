@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { translateCrimeType, translateLocation } from './translations';
 
 const margins = { left: 60, right: 30, top: 30, bottom: 60 };
 
@@ -513,9 +514,9 @@ export function chartTopPrimaryTypes(data, svgId) {
     const g = svg.append('g')
         .attr('transform', `translate(${margins.left},${margins.top})`);
 
-    // Ensure numeric values
+    // Ensure numeric values and translate
     data = data.map(d => ({
-        primary_type: d.primary_type,
+        primary_type: translateCrimeType(d.primary_type),
         count: toNumber(d.count)
     }));
 
@@ -592,9 +593,9 @@ export function chartTopLocations(data, svgId) {
     const g = svg.append('g')
         .attr('transform', `translate(${margins.left},${margins.top})`);
 
-    // Ensure numeric values
+    // Ensure numeric values and translate
     data = data.map(d => ({
-        location: d.location,
+        location: translateLocation(d.location),
         count: toNumber(d.count)
     }));
 
@@ -815,9 +816,9 @@ export function chartArrestByType(data, svgId) {
     const g = svg.append('g')
         .attr('transform', `translate(${margins.left},${margins.top})`);
 
-    // Ensure numeric values
+    // Ensure numeric values and translate
     data = data.map(d => ({
-        primary_type: d.primary_type,
+        primary_type: translateCrimeType(d.primary_type),
         with_arrest: toNumber(d.with_arrest),
         without_arrest: toNumber(d.without_arrest),
         total: toNumber(d.total)
