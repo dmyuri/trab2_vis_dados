@@ -872,13 +872,36 @@ export function chartArrestByType(data, svgId) {
         .on('mouseover', function(event, d) {
             tooltip.transition().duration(200).style('opacity', 1);
             const label = d.key === 'with_arrest' ? 'Com Prisão' : 'Sem Prisão';
-            tooltip.html(`${d.type}<br>${label}: ${d.value.toLocaleString()}`)
+            const formattedValue = Number(d.value).toLocaleString('pt-BR');
+            tooltip.html(`${d.type}<br>${label}: ${formattedValue}`)
                 .style('left', (event.pageX + 10) + 'px')
                 .style('top', (event.pageY - 10) + 'px')
                 .classed('visible', true);
         })
         .on('mouseout', function() {
             tooltip.transition().duration(200).style('opacity', 0);
+        });
+
+    // Add labels on bars
+    typeGroups.selectAll('.bar-label')
+        .data(d => [
+            { key: 'with_arrest', value: d.with_arrest, type: d.primary_type },
+            { key: 'without_arrest', value: d.without_arrest, type: d.primary_type }
+        ])
+        .enter()
+        .append('text')
+        .attr('class', 'bar-label')
+        .attr('x', d => x1Scale(d.key) + x1Scale.bandwidth() / 2)
+        .attr('y', d => {
+            const numValue = Number(d.value);
+            return numValue > 0 ? yScale(numValue) - 5 : height;
+        })
+        .attr('text-anchor', 'middle')
+        .style('font-size', '10px')
+        .style('fill', '#333')
+        .text(d => {
+            const numValue = Number(d.value);
+            return numValue > 0 ? d3.format('.2s')(numValue) : '';
         });
 
     // Axes
