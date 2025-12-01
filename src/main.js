@@ -2,7 +2,6 @@ import { Chicago } from './chicago';
 import {
     chartByHour,
     chartByDay,
-    chartByMonth,
     chartTimeline,
     chartTopPrimaryTypes,
     chartTopLocations,
@@ -60,9 +59,6 @@ async function loadAllVisualizations() {
         console.log('Carregando visualizações temporais...');
         const hourData = await chicago.getCrimesByHour();
         chartByHour(hourData, 'chart-hour');
-
-        const monthData = await chicago.getCrimesByMonth();
-        chartByMonth(monthData, 'chart-month');
         
         const monthDataYear = await chicago.getCrimesByMonthAndYear();
         chartByMonthLine(monthDataYear, 'chart-street-month');

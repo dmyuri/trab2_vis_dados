@@ -53,7 +53,6 @@ npm run dev
 ### 1. Variações Temporais
 
 - **Crimes por Hora do Dia**: Gráfico de barras mostrando a distribuição de crimes ao longo das 24 horas
-- **Crimes por Mês (Sazonalidade)**: Gráfico de barras mostrando padrões sazonais
 - **Série Temporal**: Gráfico de linha/área mostrando a evolução dos crimes ao longo do tempo
 
 ### 2. Composição de Variáveis
@@ -81,13 +80,3 @@ npm run dev
 - ✅ Análise de composição (tipos, localizações, distribuições)
 - ✅ Interface responsiva e interativa
 - ✅ Tooltips informativos em todas as visualizações
-
-## Notas sobre Qualidade de Dados
-
-O sistema inclui uma função `getDataQualityInfo()` que fornece informações sobre:
-- Total de registros
-- Registros com campos preenchidos (Date, Primary Type, Location, etc.)
-- Período coberto pelos dados (min_date, max_date)
-
-Essas informações são exibidas no console do navegador ao carregar os dados.
-
