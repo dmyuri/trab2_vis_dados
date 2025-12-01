@@ -843,7 +843,7 @@ export function chartArrestByType(data, svgId) {
 
     const color = d3.scaleOrdinal()
         .domain(['with_arrest', 'without_arrest'])
-        .range(['#667eea', '#f093fb']);
+        .range(['#667eea', '#E57373']);
 
     const tooltip = createTooltip();
 
@@ -868,7 +868,7 @@ export function chartArrestByType(data, svgId) {
         .attr('y', d => yScale(d.value))
         .attr('width', x1Scale.bandwidth())
         .attr('height', d => height - yScale(d.value))
-        .attr('fill', d => color(d.key))
+        .style('fill', d => color(d.key))
         .on('mouseover', function(event, d) {
             tooltip.transition().duration(200).style('opacity', 1);
             const label = d.key === 'with_arrest' ? 'Com Prisão' : 'Sem Prisão';
